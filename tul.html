@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markstone — Your Brand, Built Right, Every Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:        #f4ead4;
+    --cream-deep:   #ece0c4;
+    --ink:          #1c150f;
+    --maroon:       #9c2a1d;
+    --maroon-dark:  #7a2016;
+    --mustard:      #dc9c2c;
+    --mustard-deep: #c07f1a;
+    --olive:        #545a37;
+    --bark:         #6f4a30;
+    --cream-line: rgba(28,21,15,0.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    line-height:1.05;
+    font-weight:700;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:14px 26px;
+    border:2px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    background:var(--cream);
+    color:var(--ink);
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+  .btn:active{transform:translate(0,0);box-shadow:2px 2px 0 var(--ink);}
+  .btn-maroon{background:var(--maroon);color:var(--cream);border-color:var(--ink);}
+  .btn-mustard{background:var(--mustard);color:var(--ink);}
+  .btn-ink{background:var(--ink);color:var(--cream);}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--cream);
+    border-bottom:3px solid var(--ink);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 40px;
+    max-width:1240px;
+    margin:0 auto;
+    gap:24px;
+  }
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo-word{display:flex;flex-direction:column;line-height:1.05;}
+  .logo-word .name{font-family:'Fraunces',serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.01em;}
+  .logo-word .tag{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.13em;color:var(--maroon);font-weight:700;}
+
+  nav.primary{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+  nav.primary a{
+    font-family:'Space Mono',monospace;
+    font-size:0.76rem;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:9px 14px;
+    border:2px solid transparent;
+  }
+  nav.primary a:hover{border-color:var(--ink);}
+  nav.primary a.active{
+    background:var(--maroon);
+    color:var(--cream);
+    border:2px solid var(--ink);
+    box-shadow:3px 3px 0 var(--ink);
+  }
+
+  .header-actions{display:flex;align-items:center;gap:12px;}
+  .btn-small{padding:10px 18px;font-size:0.72rem;}
+
+  .nav-toggle{display:none;background:none;border:2px solid var(--ink);padding:8px 10px;cursor:pointer;}
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0;}
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    background:var(--ink);
+    color:var(--cream);
+    overflow:hidden;
+    border-bottom:2px solid var(--mustard);
+    white-space:nowrap;
+  }
+  .ticker-track{
+    display:inline-flex;
+    align-items:center;
+    animation:scroll-left 32s linear infinite;
+  }
+  .ticker-item{
+    font-family:'Space Mono',monospace;
+    font-size:0.82rem;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:11px 28px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .diamond{
+    width:8px;height:8px;
+    background:var(--mustard);
+    transform:rotate(45deg);
+    flex:none;
+  }
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    min-height:640px;
+    display:flex;
+    align-items:center;
+    border-bottom:3px solid var(--ink);
+  }
+  .hero-art{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .hero-scrim{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(100deg, rgba(18,13,9,0.93) 8%, rgba(18,13,9,0.72) 38%, rgba(18,13,9,0.28) 65%, rgba(18,13,9,0.08) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1240px;
+    margin:0 auto;
+    padding:70px 40px 90px;
+    width:100%;
+  }
+  .hero-badge{
+    display:inline-block;
+    background:var(--mustard);
+    color:var(--ink);
+    border:2px solid var(--ink);
+    padding:8px 16px;
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:26px;
+    box-shadow:4px 4px 0 rgba(0,0,0,0.4);
+  }
+  .hero h1{
+    color:var(--cream);
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    max-width:820px;
+  }
+  .hero h1 .accent{color:var(--mustard);}
+  .hero p.lede{
+    margin-top:28px;
+    max-width:560px;
+    font-size:1.08rem;
+    line-height:1.65;
+    color:#ece2ce;
+  }
+  .hero-ctas{
+    margin-top:36px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero-meta{
+    margin-top:44px;
+    display:flex;
+    gap:34px;
+    flex-wrap:wrap;
+  }
+  .hero-meta div{display:flex;flex-direction:column;gap:2px;}
+  .hero-meta .num{font-family:'Fraunces',serif;font-weight:800;font-size:1.7rem;color:var(--mustard);}
+  .hero-meta .lbl{font-family:'Space Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:#ece2ce;}
+
+  /* ---------- about split ---------- */
+  .about{
+    padding:96px 0;
+    border-bottom:3px solid var(--ink);
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:start;
+  }
+  .about-frame{
+    border:2px solid var(--ink);
+    background:var(--cream-deep);
+    padding:14px;
+    position:relative;
+    box-shadow:8px 8px 0 var(--maroon);
+  }
+  .about-frame svg{width:100%;height:auto;}
+  .about-caption{
+    font-family:'Space Mono',monospace;
+    font-size:0.76rem;
+    color:var(--ink);
+    margin-top:14px;
+    line-height:1.5;
+  }
+  .about-eyebrow-badge{
+    display:inline-block;
+    background:#c94f7c;
+    color:var(--cream);
+    padding:9px 16px;
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .about h2{
+    font-size:clamp(2rem, 3.4vw, 3rem);
+    margin-bottom:22px;
+  }
+  .about p{
+    font-size:1.02rem;
+    line-height:1.75;
+    margin-bottom:16px;
+    max-width:520px;
+    color:#2a2019;
+  }
+  .about em{
+    font-style:italic;
+    color:var(--maroon);
+    font-weight:600;
+  }
+  .about-link{
+    display:inline-block;
+    margin-top:10px;
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    border-bottom:2px solid var(--maroon);
+    padding-bottom:3px;
+  }
+
+  /* ---------- feature grid (repurposed review grid) ---------- */
+  .reviews{
+    padding:96px 0;
+    background:var(--cream-deep);
+    border-bottom:3px solid var(--ink);
+  }
+  .reviews-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    margin-bottom:50px;
+    flex-wrap:wrap;
+  }
+  .reviews-head h2{font-size:clamp(1.9rem,3vw,2.6rem);}
+  .reviews-head p{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--olive);max-width:360px;}
+
+  .review-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+  }
+  .review-card{
+    background:var(--cream);
+    border:2px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    display:flex;
+    flex-direction:column;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .review-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
+  .card-art{
+    height:150px;
+    position:relative;
+    border-bottom:2px solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .card-art svg{width:64px;height:64px;}
+  .card-body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;}
+  .card-cat{
+    font-family:'Space Mono',monospace;
+    font-size:0.66rem;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    margin-bottom:8px;
+  }
+  .card-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;margin-bottom:4px;}
+  .card-genre{font-size:0.78rem;color:var(--bark);margin-bottom:12px;font-style:italic;}
+  .card-take{font-size:0.92rem;line-height:1.55;color:#2a2019;flex:1;}
+  .card-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--cream-line);
+  }
+  .score-stamp{
+    width:52px;height:52px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:var(--mustard);
+    transform:rotate(-6deg);
+    flex:none;
+  }
+  .score-stamp .num{font-family:'Fraunces',serif;font-weight:800;font-size:0.92rem;line-height:1;}
+  .score-stamp .den{font-family:'Space Mono',monospace;font-size:0.46rem;font-weight:700;}
+  .read-link{
+    font-family:'Space Mono',monospace;
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border-bottom:2px solid var(--ink);
+  }
+
+  /* ---------- how it works ---------- */
+  .steps{
+    padding:96px 0;
+    background:var(--cream);
+    border-bottom:3px solid var(--ink);
+  }
+  .steps-head{max-width:640px;margin-bottom:50px;}
+  .steps-head h2{font-size:clamp(2rem,3.4vw,2.8rem);margin:18px 0 16px;}
+  .steps-head p{font-size:1rem;line-height:1.6;color:#2a2019;}
+  .steps-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+  }
+  .step-card{
+    background:var(--cream-deep);
+    border:2px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    padding:22px 20px 26px;
+  }
+  .step-num{
+    display:inline-block;
+    color:var(--cream);
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:0.82rem;
+    padding:6px 12px;
+    border:2px solid var(--ink);
+    margin-bottom:14px;
+  }
+  .step-card h3{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:8px;}
+  .step-card p{font-size:0.86rem;line-height:1.5;color:#2a2019;}
+
+  /* ---------- pricing (repurposed scoring bands) ---------- */
+  .pricing{
+    padding:96px 0;
+    background:var(--cream-deep);
+    border-bottom:3px solid var(--ink);
+  }
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:22px;
+  }
+  .price-band{
+    background:var(--cream);
+    border:2px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    padding:24px 20px 26px;
+    display:flex;
+    flex-direction:column;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .price-band:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
+  .price-band.featured{background:var(--maroon);color:var(--cream);}
+  .price-tag{
+    display:inline-block;
+    color:var(--cream);
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border:2px solid var(--ink);
+    margin-bottom:14px;
+    width:fit-content;
+  }
+  .price-band h3{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px;}
+  .price-amount{font-family:'Fraunces',serif;font-weight:800;font-size:1.6rem;margin-bottom:12px;}
+  .price-band.featured .price-amount{color:var(--mustard);}
+  .price-band p{font-size:0.82rem;line-height:1.5;margin-bottom:16px;flex:1;}
+  .price-band.featured p{color:#f1e2d0;}
+
+  /* ---------- specialists (repurposed critics) ---------- */
+  .critics{
+    padding:96px 0;
+    background:var(--cream);
+    border-bottom:3px solid var(--ink);
+  }
+  .critics-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:26px;
+  }
+  .critic-card{
+    background:var(--cream-deep);
+    border:2px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    padding:26px 22px;
+    text-align:left;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .critic-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
+  .critic-avatar{
+    width:52px;height:52px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    color:var(--cream);
+    margin-bottom:16px;
+  }
+  .critic-card h3{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:2px;}
+  .critic-role{
+    display:block;
+    font-family:'Space Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    margin-bottom:12px;
+  }
+  .critic-card p{font-size:0.88rem;line-height:1.55;color:#2a2019;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:var(--maroon);
+    color:var(--cream);
+    padding:100px 0;
+    text-align:center;
+    border-bottom:3px solid var(--ink);
+  }
+  .cta-band h2{
+    font-size:clamp(2.1rem,4.4vw,3.4rem);
+    max-width:820px;
+    margin:0 auto 22px;
+  }
+  .cta-band p{
+    font-size:1.05rem;
+    max-width:560px;
+    margin:0 auto 40px;
+    color:#f1e2d0;
+    line-height:1.6;
+  }
+  .cta-buttons{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+
+  /* ---------- newsletter ---------- */
+  .newsletter{
+    padding:80px 0;
+    background:var(--cream);
+    border-bottom:3px solid var(--ink);
+  }
+  .newsletter-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .newsletter-inner h2{font-size:clamp(1.8rem,3vw,2.4rem);margin:14px 0 10px;}
+  .newsletter-inner p{font-size:0.98rem;color:#2a2019;max-width:420px;line-height:1.6;}
+  .newsletter-form{display:flex;gap:12px;flex-wrap:wrap;}
+  .newsletter-form input{
+    font-family:'Karla',sans-serif;
+    font-size:0.95rem;
+    padding:14px 18px;
+    border:2px solid var(--ink);
+    background:var(--cream-deep);
+    min-width:260px;
+  }
+  .newsletter-form input:focus{outline:3px solid var(--mustard);outline-offset:1px;}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--cream);
+    padding:70px 0 34px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:50px;
+    padding-bottom:50px;
+    border-bottom:1px solid rgba(244,234,212,0.15);
+  }
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .footer-logo .name{font-family:'Fraunces',serif;font-weight:800;font-size:1.4rem;color:var(--mustard);}
+  .footer-logo .tag{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;color:#c99a5a;}
+  .footer p{font-size:0.9rem;line-height:1.65;color:#c9bfae;max-width:340px;}
+  footer h4{
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--mustard);
+    margin-bottom:18px;
+  }
+  footer ul li{margin-bottom:11px;}
+  footer ul li a{font-size:0.9rem;color:#e5dac2;}
+  footer ul li a:hover{color:var(--mustard);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    color:#8d8271;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .about-grid{grid-template-columns:1fr;}
+    .review-grid{grid-template-columns:repeat(2,1fr);}
+    .steps-grid{grid-template-columns:repeat(2,1fr);}
+    .pricing-grid{grid-template-columns:repeat(2,1fr);}
+    .critics-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:840px){
+    nav.primary{display:none;}
+    .nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;}
+    .header-inner{padding:14px 20px;}
+    .wrap{padding:0 20px;}
+    .hero-content{padding:50px 20px 60px;}
+    body.nav-open nav.primary{
+      display:flex;
+      position:absolute;
+      top:100%;left:0;right:0;
+      background:var(--cream);
+      flex-direction:column;
+      border-bottom:3px solid var(--ink);
+      padding:10px 20px 18px;
+    }
+    body.nav-open nav.primary a{width:100%;}
+  }
+  @media (max-width:640px){
+    .review-grid{grid-template-columns:1fr;}
+    .steps-grid{grid-template-columns:1fr;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .critics-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:36px;}
+    .cta-buttons,.hero-ctas{flex-direction:column;align-items:stretch;}
+    .about-frame{box-shadow:5px 5px 0 var(--maroon);}
+    .newsletter-inner{flex-direction:column;align-items:flex-start;}
+    .newsletter-form{width:100%;}
+    .newsletter-form input{flex:1;min-width:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        <circle cx="21" cy="21" r="19" fill="#dc9c2c" stroke="#1c150f" stroke-width="2"/>
+        <rect x="11" y="11" width="9" height="9" fill="#9c2a1d" stroke="#1c150f" stroke-width="1.4"/>
+        <rect x="22" y="11" width="9" height="9" fill="#545a37" stroke="#1c150f" stroke-width="1.4"/>
+        <rect x="11" y="22" width="9" height="9" fill="#f4ead4" stroke="#1c150f" stroke-width="1.4"/>
+        <rect x="22" y="22" width="9" height="9" fill="#1c150f" stroke="#1c150f" stroke-width="1.4"/>
+      </svg>
+      <div class="logo-word">
+        <span class="name">Markstone</span>
+        <span class="tag">YOUR BRAND, BUILT RIGHT</span>
+      </div>
+    </div>
+
+    <nav class="primary">
+      <a href="#" class="active">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#features">What You Get</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#specialists">Specialists</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-small" href="#">Sign In</a>
+      <a class="btn btn-maroon btn-small" href="quiz.html">Start Free Quiz</a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<section class="hero">
+  <svg class="hero-art" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1600" height="640" fill="#e7d6ae"/>
+    <g stroke="#6f4a30" stroke-width="2" fill="none" opacity="0.5">
+      <g transform="translate(90,80) rotate(-6)"><circle cx="0" cy="0" r="30"/><circle cx="0" cy="0" r="14"/><circle cx="0" cy="0" r="4" fill="#6f4a30"/></g>
+      <g transform="translate(240,190) rotate(10)"><rect x="0" y="0" width="60" height="60" rx="4"/><line x1="0" y1="30" x2="60" y2="30"/><line x1="30" y1="0" x2="30" y2="60"/></g>
+      <g transform="translate(120,330)"><rect x="0" y="0" width="70" height="42" rx="3"/><line x1="10" y1="12" x2="60" y2="12"/><line x1="10" y1="22" x2="60" y2="22"/><line x1="10" y1="32" x2="42" y2="32"/></g>
+      <g transform="translate(330,400) rotate(-8)"><polygon points="0,44 22,0 44,44"/></g>
+      <g transform="translate(80,460) rotate(4)"><rect x="0" y="0" width="46" height="46" rx="23"/></g>
+      <g transform="translate(420,120) rotate(14)"><rect x="0" y="0" width="60" height="60" transform="rotate(45 30 30)"/></g>
+      <g transform="translate(1200,90) rotate(-10)"><circle cx="0" cy="0" r="30"/><circle cx="0" cy="0" r="14"/><circle cx="0" cy="0" r="4" fill="#6f4a30"/></g>
+      <g transform="translate(1340,230) rotate(8)"><rect x="0" y="0" width="60" height="60" rx="4"/><line x1="0" y1="30" x2="60" y2="30"/><line x1="30" y1="0" x2="30" y2="60"/></g>
+      <g transform="translate(1130,320)"><rect x="0" y="0" width="70" height="42" rx="3"/><line x1="10" y1="12" x2="60" y2="12"/><line x1="10" y1="22" x2="60" y2="22"/><line x1="10" y1="32" x2="42" y2="32"/></g>
+      <g transform="translate(1300,440) rotate(-4)"><polygon points="0,44 22,0 44,44"/></g>
+      <g transform="translate(1420,140) rotate(20)"><rect x="0" y="0" width="46" height="46" rx="23"/></g>
+      <g transform="translate(980,480) rotate(6)"><rect x="0" y="0" width="60" height="60" transform="rotate(45 30 30)"/></g>
+      <g transform="translate(700,60) rotate(-14)"><circle cx="0" cy="0" r="22"/><circle cx="0" cy="0" r="8" fill="#6f4a30"/></g>
+    </g>
+    <g fill="#9c2a1d" opacity="0.14">
+      <circle cx="700" cy="150" r="220"/>
+      <circle cx="1450" cy="500" r="260"/>
+    </g>
+  </svg>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <span class="hero-badge">NO DESIGNER REQUIRED · READY IN MINUTES</span>
+    <h1>Every brand deserves<br>a <span class="accent">system</span>, not a guess</h1>
+    <p class="lede">Answer twenty questions about who you are and who you're for. Markstone hands back a full visual identity — palette, type, logo direction, and every file — built to actually match, not just look nice on a moodboard.</p>
+    <div class="hero-ctas">
+      <a href="#quiz" class="btn btn-mustard">Take the Brand Quiz</a>
+      <a href="#how" class="btn">See How It Works</a>
+    </div>
+    <div class="hero-meta">
+      <div><span class="num">20</span><span class="lbl">Question Quiz</span></div>
+      <div><span class="num">5</span><span class="lbl">Palette Options</span></div>
+      <div><span class="num">12</span><span class="lbl">Export Formats</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="about-frame">
+        <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="460" fill="#efe3c4"/>
+          <g stroke="#1c150f" stroke-width="2" fill="none">
+            <rect x="30" y="30" width="500" height="400" rx="4"/>
+          </g>
+          <g transform="translate(70,70)">
+            <rect x="0" y="0" width="90" height="90" rx="6" fill="#9c2a1d" stroke="#1c150f" stroke-width="2"/>
+            <rect x="110" y="0" width="90" height="90" rx="6" fill="#dc9c2c" stroke="#1c150f" stroke-width="2"/>
+            <rect x="0" y="110" width="90" height="90" rx="6" fill="#545a37" stroke="#1c150f" stroke-width="2"/>
+            <rect x="110" y="110" width="90" height="90" rx="6" fill="#f4ead4" stroke="#1c150f" stroke-width="2"/>
+          </g>
+          <g transform="translate(260,80) rotate(-4)">
+            <rect x="0" y="0" width="220" height="150" rx="4" fill="#f4ead4" stroke="#1c150f" stroke-width="2"/>
+            <text x="20" y="55" font-family="Fraunces, serif" font-weight="800" font-size="46" fill="#1c150f">Aa</text>
+            <line x1="20" y1="80" x2="200" y2="80" stroke="#1c150f" stroke-width="1.4"/>
+            <text x="20" y="110" font-family="Space Mono, monospace" font-weight="700" font-size="16" fill="#9c2a1d">Karla / Space Mono</text>
+            <line x1="20" y1="128" x2="140" y2="128" stroke="#1c150f" stroke-width="1"/>
+          </g>
+          <g transform="translate(70,240)">
+            <rect x="0" y="0" width="220" height="150" rx="4" fill="#c94f7c" stroke="#1c150f" stroke-width="2"/>
+            <circle cx="55" cy="55" r="30" fill="#f4ead4" stroke="#1c150f" stroke-width="2"/>
+            <polygon points="45,45 45,65 65,55" fill="#1c150f"/>
+            <line x1="20" y1="112" x2="200" y2="112" stroke="#f4ead4" stroke-width="2"/>
+            <line x1="20" y1="128" x2="150" y2="128" stroke="#f4ead4" stroke-width="1.4"/>
+          </g>
+          <g transform="translate(310,260) rotate(6)">
+            <rect x="0" y="0" width="170" height="130" rx="8" fill="#dc9c2c" stroke="#1c150f" stroke-width="2"/>
+            <rect x="20" y="20" width="50" height="50" fill="#1c150f"/>
+            <rect x="80" y="20" width="50" height="50" fill="#f4ead4" stroke="#1c150f" stroke-width="1.4"/>
+            <rect x="20" y="80" width="110" height="30" fill="#f4ead4" stroke="#1c150f" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+      <p class="about-caption">One quiz result — palette, type, and logo direction, assembled the same afternoon.</p>
+    </div>
+
+    <div>
+      <span class="about-eyebrow-badge">Namaskar, and welcome</span>
+      <h2>Built from what your<br>brand actually is</h2>
+      <p>Every identity Markstone produces starts with the same twenty questions — about your values, your audience, your industry — and ends with a system, not a suggestion. Color codes you can paste straight into code. Fonts with the actual files attached. A logo direction described in plain language, not jargon.</p>
+      <p><em>Markstone</em>, our word for the foundation a brand is built on before the first business card ever gets printed. Not a filter over a stock template. Not five colors picked because they looked nice together in a tab you had open.</p>
+      <a class="about-link" href="#how">See What the Quiz Actually Asks →</a>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="features">
+  <div class="wrap">
+    <div class="reviews-head">
+      <div>
+        <h2>What You Get</h2>
+      </div>
+      <p>One quiz result, six deliverables — each one built to work with the others, not just sit next to them.</p>
+    </div>
+
+    <div class="review-grid">
+
+      <article class="review-card">
+        <div class="card-art" style="background:#e7cf9c;">
+          <svg viewBox="0 0 64 64"><rect x="8" y="8" width="20" height="20" fill="#9c2a1d" stroke="#1c150f" stroke-width="2.5"/><rect x="36" y="8" width="20" height="20" fill="#dc9c2c" stroke="#1c150f" stroke-width="2.5"/><rect x="8" y="36" width="20" height="20" fill="#545a37" stroke="#1c150f" stroke-width="2.5"/><rect x="36" y="36" width="20" height="20" fill="#1c150f"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Color</span>
+          <h3 class="card-title">Palette Generator</h3>
+          <p class="card-genre">3–5 Cohesive Sets</p>
+          <p class="card-take">Palettes drawn straight from your quiz answers, checked for colorblind accessibility before they're ever handed to you.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">HEX</span><span class="den">CODES</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="card-art" style="background:#d9c3e0;">
+          <svg viewBox="0 0 64 64"><text x="8" y="34" font-family="serif" font-weight="800" font-size="30" fill="#1c150f">Aa</text><line x1="8" y1="44" x2="56" y2="44" stroke="#1c150f" stroke-width="2"/><text x="8" y="58" font-family="monospace" font-weight="700" font-size="12" fill="#9c2a1d">Aa</text></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Type</span>
+          <h3 class="card-title">Typography Pairing</h3>
+          <p class="card-genre">Display + Body + Utility</p>
+          <p class="card-take">Two or three fonts, chosen to work together, delivered with the actual font files instead of just names to search for.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">2–3</span><span class="den">FONTS</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="card-art" style="background:#c9d3b0;">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#545a37" stroke="#1c150f" stroke-width="2.5"/><rect x="18" y="42" width="28" height="16" rx="4" fill="#dc9c2c" stroke="#1c150f" stroke-width="2.5"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Mark</span>
+          <h3 class="card-title">Logo Style Guidance</h3>
+          <p class="card-genre">Direction, Not a File</p>
+          <p class="card-take">A written description of the logo style that fits your brand — geometric, hand-drawn, monogram — so a designer can execute it fast.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">1</span><span class="den">BRIEF</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="card-art" style="background:#e3b8a9;">
+          <svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="4" fill="#9c2a1d" stroke="#1c150f" stroke-width="2.5"/><rect x="16" y="16" width="14" height="14" fill="#f4ead4"/><rect x="34" y="16" width="14" height="8" fill="#f4ead4"/><rect x="16" y="34" width="32" height="6" fill="#f4ead4"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">System</span>
+          <h3 class="card-title">Design System File</h3>
+          <p class="card-genre">Figma · Components</p>
+          <p class="card-take">Buttons, spacing, shadows, and states, already built as components — open the file and start dragging, not building from zero.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">1</span><span class="den">FIGMA</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="card-art" style="background:#f0c98a;">
+          <svg viewBox="0 0 64 64"><rect x="6" y="14" width="22" height="22" rx="3" fill="#1c150f"/><rect x="36" y="14" width="22" height="22" rx="3" fill="#c94f7c"/><rect x="21" y="34" width="22" height="22" rx="3" fill="#dc9c2c"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Social</span>
+          <h3 class="card-title">Template Kit</h3>
+          <p class="card-genre">Every Platform Size</p>
+          <p class="card-take">Pre-sized templates for every major platform, already carrying your palette and type — swap the copy and post.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">All</span><span class="den">SIZES</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="card-art" style="background:#c3d9d6;">
+          <svg viewBox="0 0 64 64"><rect x="10" y="6" width="44" height="52" rx="3" fill="#c94f7c" stroke="#1c150f" stroke-width="2.5"/><line x1="18" y1="20" x2="46" y2="20" stroke="#f4ead4" stroke-width="2.5"/><line x1="18" y1="30" x2="46" y2="30" stroke="#f4ead4" stroke-width="2.5"/><line x1="18" y1="40" x2="34" y2="40" stroke="#f4ead4" stroke-width="2.5"/></svg>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Reference</span>
+          <h3 class="card-title">Brand Guidelines PDF</h3>
+          <p class="card-genre">Shareable · Print-Ready</p>
+          <p class="card-take">One document that explains the whole system — hand it to a freelancer, a print shop, or a new hire and skip the re-briefing.</p>
+          <div class="card-footer">
+            <span class="read-link">See Sample</span>
+            <div class="score-stamp"><span class="num">PDF</span><span class="den">GUIDE</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="steps-head">
+      <span class="about-eyebrow-badge" style="background:var(--olive);">The process</span>
+      <h2>How it works</h2>
+      <p>Four steps between "I have no idea where to start" and a brand guide you'd actually hand to a client.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num" style="background:#2e6b4f;">01</div>
+        <h3>Take the quiz</h3>
+        <p>Twenty questions on your values, audience, and industry. Ten minutes, no design vocabulary required.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:var(--mustard-deep);">02</div>
+        <h3>Review your system</h3>
+        <p>See three to five palette directions, paired typography, and a logo style brief built from your answers.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:#b98a2e;">03</div>
+        <h3>Preview it live</h3>
+        <p>Check the system on a business card, a website header, and a social post before you commit to anything.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:var(--maroon);">04</div>
+        <h3>Export everything</h3>
+        <p>CSS variables, Adobe swatches, a Figma file, and a PDF guide — pick the formats your workflow actually uses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="reviews-head">
+      <div><h2>Pricing</h2></div>
+      <p>Start free. Upgrade only when you need the files, the mockups, or a real designer's eyes on it.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-band">
+        <span class="price-tag" style="background:var(--olive);">Free</span>
+        <h3>Starter</h3>
+        <div class="price-amount">$0</div>
+        <p>The quiz result — one palette direction plus a typography suggestion, enough to see the shape of your brand.</p>
+        <a class="btn btn-small" href="#quiz">Start Free</a>
+      </div>
+      <div class="price-band">
+        <span class="price-tag" style="background:var(--mustard-deep);">Pro</span>
+        <h3>Full System</h3>
+        <div class="price-amount">$19.99</div>
+        <p>Every palette option, the full type pairing, a real Figma file, the brand guide, and mockups you can show a client.</p>
+        <a class="btn btn-small" href="#quiz">Choose Pro</a>
+      </div>
+      <div class="price-band featured">
+        <span class="price-tag" style="background:var(--mustard);color:var(--ink);">Most Booked</span>
+        <h3>Designer Collab</h3>
+        <div class="price-amount">$49.99</div>
+        <p>Everything in Pro, plus a one-hour call with a Markstone designer to refine the direction before you ship it.</p>
+        <a class="btn btn-mustard btn-small" href="#quiz">Book a Call</a>
+      </div>
+      <div class="price-band">
+        <span class="price-tag" style="background:var(--bark);">Complete</span>
+        <h3>Full Brand Package</h3>
+        <div class="price-amount">$97.99</div>
+        <p>Everything above, plus a matched website template and the full social media kit, ready to launch on.</p>
+        <a class="btn btn-small" href="#quiz">Get the Package</a>
+      </div>
+      <div class="price-band">
+        <span class="price-tag" style="background:var(--maroon);">Hands-Off</span>
+        <h3>Done-For-You</h3>
+        <div class="price-amount">$297</div>
+        <p>Hand off the quiz results and get back a complete identity, designed end-to-end by a Markstone specialist.</p>
+        <a class="btn btn-small" href="#quiz">Hand It Off</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="critics" id="specialists">
+  <div class="wrap">
+    <div class="reviews-head">
+      <div>
+        <h2>Meet the specialists</h2>
+      </div>
+      <p>The designers behind every Designer Collab call and Done-For-You package.</p>
+    </div>
+    <div class="critics-grid">
+      <div class="critic-card">
+        <div class="critic-avatar" style="background:var(--maroon);">MO</div>
+        <h3>Maya Okafor</h3>
+        <span class="critic-role">Color & Identity</span>
+        <p>Won't sign off on a palette until it passes a colorblind check and still reads right in grayscale.</p>
+      </div>
+      <div class="critic-card">
+        <div class="critic-avatar" style="background:var(--olive);">RA</div>
+        <h3>Rowan Aldridge</h3>
+        <span class="critic-role">Typography</span>
+        <p>Has strong, well-defended opinions on kerning. Will talk you out of a trendy font that won't age well.</p>
+      </div>
+      <div class="critic-card">
+        <div class="critic-avatar" style="background:#c94f7c;">PN</div>
+        <h3>Priya Nair</h3>
+        <span class="critic-role">Logo & Mark</span>
+        <p>Sketches by hand before touching a screen. Believes a good mark should work at business-card size, full stop.</p>
+      </div>
+      <div class="critic-card">
+        <div class="critic-avatar" style="background:var(--mustard);color:var(--ink);">TM</div>
+        <h3>Theo Marsh</h3>
+        <span class="critic-role">Systems & Handoff</span>
+        <p>Builds the Figma files. If a component isn't reusable, he considers the job unfinished.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="quiz">
+  <div class="wrap">
+    <h2>Your brand's already<br>in your head — let's build it</h2>
+    <p>Twenty questions, ten minutes, and a real visual identity waiting on the other side. No credit card for the free tier, no design degree required.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-mustard">Take the Brand Quiz</a>
+      <a href="#pricing" class="btn btn-ink">Compare Plans</a>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="wrap newsletter-inner">
+    <div>
+      <span class="hero-badge">No spam, just systems</span>
+      <h2>Get a free brand tip weekly</h2>
+      <p>One email a week: a color pairing, a font match, or a mistake we see brands make on repeat — and how to fix it.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="you@example.com" required aria-label="Email address">
+      <button type="submit" class="btn btn-mustard">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none">
+            <circle cx="21" cy="21" r="19" fill="#dc9c2c" stroke="#f4ead4" stroke-width="2"/>
+            <rect x="11" y="11" width="9" height="9" fill="#9c2a1d"/>
+            <rect x="22" y="22" width="9" height="9" fill="#1c150f"/>
+          </svg>
+          <div>
+            <div class="name">Markstone</div>
+            <div class="tag">YOUR BRAND, BUILT RIGHT</div>
+          </div>
+        </div>
+        <p>A complete visual identity system — palette, type, logo direction, and every file — built from twenty questions, not a template.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#features">What You Get</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#specialists">Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#quiz">Take the Quiz</a></li>
+          <li><a href="#">Sample Brand Guide</a></li>
+          <li><a href="#">Sign In</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Markstone. Every system is earned, never templated.</span>
+      <span>Made for people who'd rather ship a brand than fight one.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Build seamless marquee ticker
+  const tags = ["COLOR PALETTES","TYPE PAIRINGS","LOGO GUIDANCE","FIGMA FILES","BRAND GUIDELINES","SOCIAL KITS","ACCESSIBLE COLOR","WEBSITE SCHEMES","MOCKUP PREVIEWS","EXPORT-READY"];
+  const track = document.getElementById('tickerTrack');
+  const build = () => tags.map(t => `<span class="ticker-item"><span class="diamond"></span>${t}</span>`).join('');
+  track.innerHTML = build() + build();
+</script>
+
+</body>
+</html>
